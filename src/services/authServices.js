@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import { pool } from "../config/db.js";
-import jwt from "jsonwebtoken";
+// import jwt from "jsonwebtoken";
 
-const JWT_SECRET = "ldssfsdgsfkopg";
+// const JWT_SECRET = "ldssfsdgsfkopg";
 
 export const registerUser = async (user) => {
   console.log(user);
@@ -25,23 +25,40 @@ export const loginUser = async (username, password) => {
       `SELECT * FROM data_users WHERE username=?`,
       [username]
     );
+    console.log([rows]);
+
     if (rows.length === 0) {
       return { success: false, message: "Username not found" };
     }
     const user = rows[0];
+    console.log(user);
+
+    console.log("Password received from client:", password);
+    console.log("Hashed password from DB:", user.password);
+
     const passwordMatch = await bcrypt.compare(password, user.password);
+    console.log("password match");
+    console.log(passwordMatch);
+
     if (!passwordMatch) {
       return { success: false, message: "Incorrect password" };
     }
-    const token = jwt.sign(
-      { id: user.iddata_users, username: user.username },
-      JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-    return { success: true, message: "Logged in successfully", token: token };
+    // const token = jwt.sign(
+    //   { id: user.iddata_users, username: user.username },
+    //   JWT_SECRET,
+    //   { expiresIn: "1h" }
+    // );
+    return {
+      success: true,
+      message: "Logged in successfully",
+      nama: user.nama,
+      username: user.username,
+      role: user.role,
+      isLoggedIn: true,
+    };
   } catch (error) {
     console.log(error);
-    return { success: false, message:"Login failed", error: error };
+    return { success: false, message: "Login failed", error: error }; 
   }
 };
 

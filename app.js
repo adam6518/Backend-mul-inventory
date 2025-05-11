@@ -1,6 +1,11 @@
 import express from 'express';
 import {checkConnection} from './src/config/db.js'
 import authRoutes from './src/routes/authRoutes.js'
+import projectRoutes from './src/routes/projectRoutes.js'
+import userRoutes from './src/routes/userRoutes.js'
+import orderRoutes from './src/routes/orderRoutes.js'
+import riwayatRoutes from './src/routes/riwayatRoutes.js'
+import finansialRoutes from './src/routes/finansialRoutes.js'
 import cors from 'cors'
 
 import createAllTable from './src/utils/dbUtils.js' 
@@ -10,6 +15,11 @@ app.use(cors())
 
 app.use(express.json());
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/project', projectRoutes);
+app.use('/api/order', orderRoutes);
+app.use('/api/riwayat', riwayatRoutes);
+app.use('/api/finansial', finansialRoutes);
 
 app.listen(3000, async () => {
     console.log('Server rnning on port 3000');
