@@ -10,6 +10,7 @@ import cors from 'cors'
 
 import createAllTable from './src/utils/dbUtils.js' 
 
+const PORT = process.env.PORT || 3000;
 const app = express();
 app.use(cors())
 
@@ -21,8 +22,8 @@ app.use('/api/order', orderRoutes);
 app.use('/api/riwayat', riwayatRoutes);
 app.use('/api/finansial', finansialRoutes);
 
-app.listen(3000, async () => {
-    console.log('Server rnning on port 3000');
+app.listen(PORT, async () => {
+    console.log(`Server rnning on port ${PORT}`);
     try {
         await checkConnection()
         await createAllTable()
