@@ -1,12 +1,9 @@
 import userModel from "../models/userModel.js";
-import {
-  registerUser,
-  loginUser
-} from "../services/authServices.js";
+import { registerUser, loginUser } from "../services/authServices.js";
 
 export const register = async (req, res) => {
   const { nama, username, password, role } = req.body;
-  
+
   if (!nama || !username || !password || !role)
     return res
       .status(400)
@@ -31,10 +28,11 @@ export const login = async (req, res) => {
   console.log(username);
   console.log(password);
   console.log(req.body);
-  
+
   if (!username || !password) {
     return res
-      .status(400).json({ success: false, message: "All fields are required" });
+      .status(400)
+      .json({ success: false, message: "All fields are required" });
   }
 
   try {
@@ -45,6 +43,8 @@ export const login = async (req, res) => {
       return res.status(400).json(response);
     }
   } catch (error) {
-    return { success: false, message: "failed to login !!" };
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
   }
 };
