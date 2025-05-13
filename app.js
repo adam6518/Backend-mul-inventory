@@ -11,17 +11,12 @@ import cors from "cors";
 import createAllTable from "./src/utils/dbUtils.js";
 
 const PORT = process.env.PORT || 3000;
-const allowedOrigins = [
-  "http://localhost:3000", // saat dev
-  "https://mul-inventory-adam6518s-projects.vercel.app", // Vercel production
-];
+const corsOptions = {
+  origin: "https://backend-mul-inventory-production.up.railway.app", // ganti dengan domain vercel kamu
+  credentials: true,
+};
 const app = express();
-app.use(
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
