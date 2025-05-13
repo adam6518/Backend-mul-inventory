@@ -26,20 +26,16 @@ export const getAllRiwayatController = async (req, res) => {
 };
 
 export const addRiwayatController = async (req, res) => {
-  const riwayatArray = req.body; // Expecting array directly in body
-
+  const riwayatArray = req.body;
   if (!Array.isArray(riwayatArray) || riwayatArray.length === 0) {
     return res
       .status(400)
       .json({ message: "Request body must be a non-empty array" });
   }
-
-  // Validate each riwayat object
   for (const riwayatData of riwayatArray) {
     const { itemOrdered, lokasiPenanaman, qtyOrdered, tanggalOrder } =
       riwayatData;
     const numericQtyOrdered = parseFloat(qtyOrdered);
-
     if (
       !itemOrdered ||
       !lokasiPenanaman ||
@@ -51,9 +47,7 @@ export const addRiwayatController = async (req, res) => {
       });
     }
   }
-
   try {
-    // Pass the entire array to the service for batch insert
     const response = await addRiwayat(riwayatArray);
     if (response.success) {
       return res.status(200).json(response);
@@ -71,7 +65,6 @@ export const addRiwayatController = async (req, res) => {
 
 export const searchRiwayatController = async (req, res) => {
   const { item } = req.query;
-  console.log(item);
   try {
     const response = await searchRiwayat(item);
     if (response.success) {
@@ -92,8 +85,6 @@ export const searchRiwayatController = async (req, res) => {
 
 export const sortingRiwayatController = async (req, res) => {
   const order = req.query.order === "DESC" ? "DESC" : "ASC";
-//   console.log(order);
-  
   try {
     const response = await sortingRiwayat(order);
     if (response.success) {

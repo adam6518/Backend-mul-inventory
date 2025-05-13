@@ -4,7 +4,7 @@ import {
   deleteDataProject,
   getAllProject,
   searchProject,
-  updateProject
+  updateProject,
 } from "../services/projectServices.js";
 
 export const addProjectController = async (req, res) => {
@@ -15,11 +15,7 @@ export const addProjectController = async (req, res) => {
     statusProject,
     tahapanProject,
   } = req.body;
-  //   const cleanedNilaiProject = String(nilaiProject).replace(/[^0-9.-]+/g, "");
   const numericNilaiProject = parseFloat(nilaiProjectRaw);
-  console.log(req.body);
-  console.log(numericNilaiProject);
-
   if (
     !namaProject ||
     !nomorSi ||
@@ -29,7 +25,6 @@ export const addProjectController = async (req, res) => {
   ) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
-
   const project = new projectModel({
     namaProject,
     nomorSi,
@@ -37,7 +32,6 @@ export const addProjectController = async (req, res) => {
     statusProject,
     tahapanProject,
   });
-
   try {
     const response = await addProject(project);
     if (response.success) {
@@ -79,7 +73,7 @@ export const deleteDataProjectController = async (req, res) => {
     if (response.success) {
       return res.status(200).json({
         success: true,
-        message: response.message
+        message: response.message,
       });
     } else {
       return res
@@ -93,15 +87,13 @@ export const deleteDataProjectController = async (req, res) => {
 
 export const searchDataProjectController = async (req, res) => {
   const { namaProject } = req.query;
-  console.log(namaProject);
-
   try {
     const response = await searchProject(namaProject);
     if (response.success) {
       return res.status(200).json({
         success: true,
         message: response.message,
-        data: response.data
+        data: response.data,
       });
     } else {
       return res
@@ -122,7 +114,6 @@ export const updateProjectController = async (req, res) => {
     status,
     tahapan,
   } = req.body;
-
   if (
     !iddata_project ||
     !nama_project ||
@@ -133,24 +124,21 @@ export const updateProjectController = async (req, res) => {
   ) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
-
   const numericNilaiProject = parseFloat(nilai_project);
   if (isNaN(numericNilaiProject)) {
     return res.status(400).json({ message: "Invalid nilaiProjectRaw value" });
   }
-
   const project = {
     iddata_project,
     nama_project,
     no_si,
     nilai_project: numericNilaiProject,
     status,
-    tahapan
+    tahapan,
   };
-
   try {
     const response = await updateProject(project);
-    
+
     if (response.success) {
       return res.status(200).json(response);
     } else {

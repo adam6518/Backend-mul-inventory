@@ -19,7 +19,6 @@ export const getAllFinansial = async () => {
 };
 
 export const addFinansial = async (finansialArray) => {
-  console.log(finansialArray);
   try {
     const values = finansialArray.map((finansial) => [
       finansial.namaProject,
@@ -37,7 +36,6 @@ export const addFinansial = async (finansialArray) => {
 
 export const checkFinansialExists = async (finansial) => {
   try {
-    console.log("Checking existence for:", finansial);
     const query = `
           SELECT COUNT(*) as count FROM finansial 
           WHERE nama_project = ? AND pendapatan = ? AND modal_awal = ? AND profit = ?
@@ -49,7 +47,6 @@ export const checkFinansialExists = async (finansial) => {
       finansial.profit,
     ];
     const [rows] = await pool.query(query, values);
-    console.log("Existence check result:", rows[0].count);
     return rows[0].count > 0;
   } catch (error) {
     console.error("Error in checkFinansialExists:", error);
@@ -85,8 +82,6 @@ export const updateFinansialByName = async (namaProject, updateData) => {
 };
 
 export const sortingFinansial = async (order = "ASC") => {
-  console.log(order);
-
   try {
     const query = `SELECT * FROM finansial ORDER BY pendapatan ${order}`;
     const [rows] = await pool.query(query);

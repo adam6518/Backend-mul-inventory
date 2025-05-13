@@ -1,8 +1,6 @@
 import { pool } from "../config/db.js";
 
 export const addRiwayat = async (riwayatArray) => {
-  console.log(riwayatArray);
-
   try {
     const values = riwayatArray.map((riwayat) => [
       riwayat.itemOrdered,
@@ -10,10 +8,8 @@ export const addRiwayat = async (riwayatArray) => {
       riwayat.qtyOrdered,
       riwayat.tanggalOrder,
     ]);
-
     const query = `INSERT INTO riwayat (item_ordered, lokasi_penanaman, qty_ordered, tanggal_order) VALUES ?`;
     await pool.query(query, [values]);
-
     return { success: true, message: "Batch riwayat added successfully" };
   } catch (error) {
     return { success: false, message: "Failed to add batch riwayat", error };
@@ -39,7 +35,6 @@ export const getAllRiwayat = async () => {
 };
 
 export const searchRiwayat = async (item) => {
-  console.log(item);
   try {
     const query = `SELECT * FROM riwayat WHERE item_ordered LIKE ?`;
     const [rows] = await pool.query(query, [`%${item}%`]);
@@ -57,9 +52,7 @@ export const searchRiwayat = async (item) => {
   }
 };
 
-export const sortingRiwayat = async (order = "ASC") => {
-    console.log(order);
-    
+export const sortingRiwayat = async (order = "ASC") => {  
   try {
     const query = `SELECT * FROM riwayat ORDER BY tanggal_order ${order}`;
     const [rows] = await pool.query(query);

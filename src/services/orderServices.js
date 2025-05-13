@@ -1,7 +1,6 @@
 import { pool } from "../config/db.js";
 
 export const addOrder = async (order) => {
-  console.log(order);
   try {
     const query = `INSERT INTO data_order (item_pekerjaan, nama_project, volume_bq, qty_reject, qty_order, tanggal_checklist, tahapan) VALUES (?, ?, ?, ?, ?, ?, ?)`;
     const values = [
@@ -69,7 +68,6 @@ export const deleteDataOrder = async (orderId) => {
 };
 
 export const searchOrder = async (itemPekerjaan) => {
-  console.log(itemPekerjaan);
   try {
     const query = `SELECT * FROM data_order WHERE item_pekerjaan LIKE ?`;
     const [rows] = await pool.query(query, [`%${itemPekerjaan}%`]);
@@ -88,7 +86,6 @@ export const searchOrder = async (itemPekerjaan) => {
 };
 
 export const updateOrder = async (order) => {
-  console.log(order);
   try {
     const query = `
             UPDATE data_order

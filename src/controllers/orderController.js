@@ -21,8 +21,6 @@ export const addOrderController = async (req, res) => {
   const numericVolBq = parseFloat(volumeBq);
   const numericQtyReject = parseFloat(qtyReject);
   const numericQtyOrder = parseFloat(qtyOrder);
-  console.log(req.body);
-
   if (
     !itemPekerjaan ||
     !namaProject ||
@@ -34,7 +32,6 @@ export const addOrderController = async (req, res) => {
   ) {
     return res.status(400).json({ message: "Please fill all fields" });
   }
-
   const order = new orderModel({
     itemPekerjaan,
     namaProject,
@@ -44,7 +41,6 @@ export const addOrderController = async (req, res) => {
     tanggalChecklist,
     tahapan,
   });
-
   try {
     const response = await addOrder(order);
     if (response.success) {
