@@ -11,11 +11,23 @@ import cors from "cors";
 import createAllTable from "./src/utils/dbUtils.js";
 
 const PORT = process.env.PORT || 3000;
-const corsOptions = {
-  origin: "https://mul-inventory-adam6518s-projects.vercel.app", // ganti dengan domain vercel kamu
-};
+const allowedOrigins = [
+  "http://localhost:3000", // jika frontend dev pakai port 3000
+  "http://localhost:3001", // jika frontend dev pakai port 3001 (sesuai error Anda)
+  "https://mul-inventory-adam6518s-projects.vercel.app",
+];
 const app = express();
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
