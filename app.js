@@ -12,7 +12,7 @@ import createAllTable from "./src/utils/dbUtils.js";
 
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
-  origin: "https://mul-inventory-adam6518s-projects.vercel.app/", // ganti dengan domain vercel kamu
+  origin: "https://mul-inventory-adam6518s-projects.vercel.app", // ganti dengan domain vercel kamu
 };
 const app = express();
 app.use(cors(corsOptions));
