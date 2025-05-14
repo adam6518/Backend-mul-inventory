@@ -28,6 +28,7 @@ export const login = async (req, res) => {
   console.log(username);
   console.log(password);
   console.log(req.body);
+  console.log("BODY YANG DITERIMA:", req.body);
 
   if (!username || !password) {
     return res
