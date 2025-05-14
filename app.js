@@ -15,6 +15,7 @@ const allowedOrigins = [
   "http://localhost:3000", // jika frontend dev pakai port 3000
   "http://localhost:3001", // jika frontend dev pakai port 3001 (sesuai error Anda)
   "https://mul-inventory-adam6518s-projects.vercel.app",
+  "https://mul-inventory-1svryelu8-adam6518s-projects.vercel.app",
 ];
 const app = express();
 app.use(
@@ -26,8 +27,11 @@ app.use(
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.options("*", cors()); // penting untuk OPTIONS request
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
