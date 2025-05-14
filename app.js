@@ -31,10 +31,10 @@ const corsOptions = {
   credentials: true, // Boleh true walaupun tidak pakai cookie
 };
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/project", projectRoutes);
