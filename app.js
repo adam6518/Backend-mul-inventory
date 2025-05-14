@@ -10,30 +10,31 @@ import cors from "cors";
 
 import createAllTable from "./src/utils/dbUtils.js";
 
+const app = express();
 const PORT = process.env.PORT || 3000;
 const allowedOrigins = [
-  "http://localhost:3000", // jika frontend dev pakai port 3000
-  "http://localhost:3001", // jika frontend dev pakai port 3001 (sesuai error Anda)
+  "http://localhost:3000",
+  "http://localhost:3001",
   "https://mul-inventory-adam6518s-projects.vercel.app",
   "https://mul-inventory-1svryelu8-adam6518s-projects.vercel.app",
 ];
-const app = express();
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-app.options("*", cors()); // penting untuk OPTIONS request
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true, // Boleh true walaupun tidak pakai cookie
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/project", projectRoutes);
