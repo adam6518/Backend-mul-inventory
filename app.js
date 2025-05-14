@@ -16,6 +16,8 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",
   "https://mul-inventory-adam6518s-projects.vercel.app",
+  "https://mul-inventory-1svryelu8-adam6518s-projects.vercel.app",
+  "https://mul-inventory-git-main-adam6518s-projects.vercel.app",
 ];
 const corsOptions = {
   origin: function (origin, callback) {
