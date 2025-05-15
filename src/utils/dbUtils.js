@@ -53,21 +53,35 @@ const createTable = async (tableName, query) => {
   }
 };
 
+// const createAllTable = async () => {
+//   try {
+//     await createTable("data_users", dataUsersQuery);
+//     console.log("All tables created");
+//     await createTable("data_project", dataProjectQuery);
+//     console.log("All tables created");
+//     await createTable("data_order", orderQuery);
+//     console.log("All tables created");
+//     await createTable("riwayat", riwayatQuery);
+//     console.log("All tables created");
+//     await createTable("finansial", finansialQuery);
+//     console.log("All tables created");
+//   } catch (error) {
+//     console.log("error creating tables", error);
+
+//     throw error;
+//   }
+// };
 const createAllTable = async () => {
   try {
     await createTable("data_users", dataUsersQuery);
-    console.log("All tables created");
     await createTable("data_project", dataProjectQuery);
-    console.log("All tables created");
     await createTable("data_order", orderQuery);
-    console.log("All tables created");
     await createTable("riwayat", riwayatQuery);
-    console.log("All tables created");
     await createTable("finansial", finansialQuery);
-    console.log("All tables created");
-  } catch (error) {
-    console.log("error creating tables", error);
 
+    console.log("✅ All tables created successfully");
+  } catch (error) {
+    console.error("❌ Error creating one or more tables:", error);
     throw error;
   }
 };
