@@ -11,7 +11,7 @@ import cors from "cors";
 import createAllTable from "./src/utils/dbUtils.js";
 
 const app = express();
-const PORT = process.env.DB_PORT || 3000;
+const PORT = process.env.DB_PORT || 3306;
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:3001",

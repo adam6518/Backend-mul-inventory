@@ -59,11 +59,11 @@ const createAllTable = async () => {
     console.log("All tables created");
     await createTable("data_project", dataProjectQuery);
     console.log("All tables created");
-    await createTable("data_project", orderQuery);
+    await createTable("data_order", orderQuery);
     console.log("All tables created");
-    await createTable("data_project", riwayatQuery);
+    await createTable("riwayat", riwayatQuery);
     console.log("All tables created");
-    await createTable("data_project", finansialQuery);
+    await createTable("finansial", finansialQuery);
     console.log("All tables created");
   } catch (error) {
     console.log("error creating tables", error);
