@@ -8,6 +8,18 @@ export const register = async (req, res) => {
     return res
       .status(400)
       .json({ success: false, message: "All fields are required" });
+  // const missingFields = [];
+  // if (!nama) missingFields.push("nama");
+  // if (!username) missingFields.push("username");
+  // if (!password) missingFields.push("password");
+  // if (!role) missingFields.push("role");
+
+  // if (missingFields.length > 0) {
+  //   return res.status(400).json({
+  //     success: false,
+  //     message: `Missing required fields: ${missingFields.join(", ")}`,
+  //   });
+  // }
 
   const user = new userModel({ nama, username, password, role });
 

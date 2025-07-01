@@ -97,7 +97,7 @@ export const searchDataProjectController = async (req, res) => {
       });
     } else {
       return res
-        .status(404)
+        .status(400)
         .json({ success: false, message: response.message, data: [] });
     }
   } catch (error) {
